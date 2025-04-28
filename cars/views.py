@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Car, Service
-from .forms import CarForm, ServiceForm
+from .models import Car, Service, Transaction
+from .forms import CarForm, ServiceForm, TransactionForm
 
 def index(request):
     cars = Car.objects.all()
@@ -40,3 +40,22 @@ def create_car_service(request, car_id):
 def service_index(request):
     services = Service.objects.all()
     return render(request, 'services/index.html', {'services': services})
+
+def transaction_index(request):
+    transactions = Transaction.objects.all()
+    return render(request, 'transactions/index.html', {'transactions': transactions})
+
+def create_car_transaction(requset, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    if requset.method == 'POST':
+        form = TransactionForm(requset.POST)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.car = car
+            transaction.save()
+
+            return redirect('cars:index')
+    else:
+        form = TransactionForm()
+    
+    return render(requset, 'transactions/create.html', {'form': form, 'car': car})
