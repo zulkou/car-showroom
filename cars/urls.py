@@ -6,6 +6,8 @@ app_name = 'cars'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('create/', views.create_car, name='create'),
-    path('<uuid:car_id>/', views.detail_car, name='detail'),
+    path('create/', views.create_car, name='create_car'),
+    path('<uuid:car_id>/', views.detail_car, name='detail_car'),
+    path('services/', views.service_index, name='service_index'),
+    path('services/create/<uuid:car_id>', views.create_car_service, name='create_car_service')
 ]

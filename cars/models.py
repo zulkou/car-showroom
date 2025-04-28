@@ -1,4 +1,5 @@
 import uuid
+import datetime
 from django.db import models
 
 # Car Model
@@ -21,12 +22,13 @@ class Car(models.Model):
 class Service(models.Model):
     id = models.UUIDField(
         primary_key=True,
-        default=uuid.uuid3,
+        default=uuid.uuid4,
         editable=False
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="services")
+    date = models.DateField(default=datetime.date.today)
     description = models.TextField()
     cost = models.BigIntegerField()
     

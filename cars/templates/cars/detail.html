@@ -23,5 +23,16 @@
             <p>Base Price: Rp{{ car.base_price|intdot }}</p>
         </li>
     </ul>
+
+    <h2>Service History</h2>
+    <ul>
+    {% for service in services %}
+        <li>{{ service.date }} - {{ service.description }}</li>
+    {% empty %}
+        <li>No services yet.</li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'cars:create_car_service' car.id %}">Create Service for this Car</a>
 </body>
 </html>

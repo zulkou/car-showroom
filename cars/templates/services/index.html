@@ -6,17 +6,15 @@
     <title>Car Form</title>
 </head>
 <body>    
-    <h1>Car List</h1>
-
-    <a href="{% url 'cars:create_car' %}">Add New Car</a>
+    <h1>All service history</h1>
 
     <ul>
-    {% for car in cars %}
+    {% for service in services %}
         <li>
-        <a href="{% url 'cars:detail_car' car.id %}">{{ car }}</a>
+        <p>{{ service }}</p>
         </li>
     {% empty %}
-        <li>No cars available.</li>
+        <li>No service record.</li>
     {% endfor %}
     </ul>
 </body>
