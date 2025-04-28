@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Form</title>
+</head>
+<body>
+    {% load number_filters %}
+    <h1>{{ car }}</h1>
+
+    <ul>
+        <li>
+            <p>Brand: {{ car.brand }}</p>
+        </li>
+        <li>
+            <p>Model: {{ car.model }}</p>
+        </li>
+        <li>
+            <p>Year: {{ car.year }}</p>
+        </li>
+        <li>
+            <p>Base Price: Rp{{ car.base_price|intdot }}</p>
+        </li>
+    </ul>
+</body>
+</html>
