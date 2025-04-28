@@ -45,17 +45,37 @@ def transaction_index(request):
     transactions = Transaction.objects.all()
     return render(request, 'transactions/index.html', {'transactions': transactions})
 
-def create_car_transaction(requset, car_id):
+def create_car_transaction(request, car_id):
     car = get_object_or_404(Car, id=car_id)
-    if requset.method == 'POST':
-        form = TransactionForm(requset.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.car = car
-            transaction.save()
-
-            return redirect('cars:index')
-    else:
-        form = TransactionForm()
     
-    return render(requset, 'transactions/create.html', {'form': form, 'car': car})
+    if request.method == 'POST':
+        if 'confirm_transaction' in request.POST:
+            # Handle the final confirmation
+            form_data = request.POST
+            transaction = Transaction.objects.create(
+                car=car,
+                is_loan=form_data['is_loan'] == 'on',
+                annual_interest_rate=form_data['annual_interest_rate'],
+                total_cost=form_data['total_cost']
+            )
+
+            # Mark the car as sold
+            car.is_sold = True
+            car.save()
+
+            # Redirect to the success page after the transaction is saved
+            return redirect('cars:transaction_index')
+
+        else:
+            # If coming from the initial form, go to the confirmation page
+            form = TransactionForm(request.POST)
+            if form.is_valid():
+                form_data = form.cleaned_data
+                return render(request, 'transactions/confirmation.html', {
+                    'form_data': form_data,
+                    'car': car
+                })
+    else:
+        # Handle GET request to show the form page
+        form = TransactionForm()
+        return render(request, 'transactions/create.html', {'form': form, 'car': car})

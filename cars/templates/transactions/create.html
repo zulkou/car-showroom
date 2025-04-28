@@ -7,12 +7,22 @@
     <title>Service Form</title>
 </head>
 <body>
-    <h1>Sell Form for {{ car.name }}</h1>
+    <h3>Create Transaction for Car: {{ car }}</h3>
+    <p>Brand: {{ car.brand }}</p>
+    <p>Base Price: {{ car.base_price }}</p>
 
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sell</button>
+        
+        {{ form.as_p }}  <!-- Render the form fields (editable) -->
+        
+        <button type="submit">Proceed to Confirmation</button>
     </form>
+
+    <!-- Cancel button to go back to a previous page, like the car detail page -->
+    <a href="{% url 'cars:detail_car' car.id %}">
+        <button type="button">Cancel</button>
+    </a>
+
 </body>
 </html>

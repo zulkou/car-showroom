@@ -1,0 +1,22 @@
+<h3>Confirm Transaction for Car: {{ car }}</h3>
+<p>Brand: {{ car.brand }}</p>
+<p>Base Price: {{ car.base_price }}</p>
+
+<h4>Transaction Details:</h4>
+<ul>
+    <li><strong>Total Cost:</strong> {{ form_data.total_cost }}</li>
+    <li><strong>Annual Interest Rate:</strong> {{ form_data.annual_interest_rate }}%</li>
+    <li><strong>Loan Status:</strong> {% if form_data.is_loan %}Yes{% else %}No{% endif %}</li>
+</ul>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="total_cost" value="{{ form_data.total_cost }}">
+    <input type="hidden" name="annual_interest_rate" value="{{ form_data.annual_interest_rate }}">
+    <input type="hidden" name="is_loan" value="{{ form_data.is_loan }}">
+
+    <button type="submit" name="confirm_transaction" value="1">Confirm Transaction</button>
+    <a href="{% url 'cars:create_car_transaction' car.id %}">
+        <button type="button">Cancel</button>
+    </a>
+</form>
