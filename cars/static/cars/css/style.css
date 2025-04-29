@@ -1,205 +1,34 @@
-/* --- General Styles & Body --- */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f8f9fa; /* Light grey background */
-    color: #343a40; /* Darker text color */
+* {
     margin: 0;
-    padding: 0; /* Add some padding around the container */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
 }
 
 .container {
-    max-width: 800px; /* Limit content width */
-    margin: 40px auto; /* Center the container horizontally with space top/bottom */
-    background-color: #ffffff; /* White background for content */
-    padding: 30px 40px; /* Padding inside the container */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    max-width: 1200px;
+    margin: 40px auto;
+    width: 100%;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 2rem;
 }
 
-/* --- Heading --- */
-h1 {
-    color: #0056b3; /* A nice blue color */
-    margin-bottom: 30px; /* Space below the heading */
-    text-align: center;
-    font-weight: 600;
-}
-
-/* Centering the Add New Car button */
-.btn-add-car {
-    display: block;
-    margin: 30px auto;  /* Center button with margin */
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.btn-add:hover {
-    background-color: #2980b9;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .btn-add {
-        width: 100%;  /* Button will take full width on small screens */
-        padding: 12px 0;
-        font-size: 16px;
-    }
-}
-
-/* --- Car List Styling --- */
-.car-list {
-    list-style: none; /* Remove default bullet points */
-    padding: 0;
-    margin: 0;
-    border: 1px solid #dee2e6; /* Light border around the list */
-    border-radius: 5px; /* Rounded corners for the list */
-    overflow: hidden; /* Keeps children within rounded corners */
-}
-
-.car-list li {
-    display: flex;
-    align-items: center;        /* Vertically center */
-    justify-content: space-between; /* Push left and right apart */
-    border-bottom: 1px solid #dee2e6;
-    padding: 10px 0;
-}
-
-.car-list .left-content {
-    flex: 1;                      /* Take remaining space */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.car-list .right-content {
-    width: 10%;                   /* Fixed width */
-    text-align: right;             /* Align text inside to right */
-}
-
-.car-list li:last-child {
-    border-bottom: none; /* Remove border from the last item */
-}
-
-.car-list li a {
-    display: block; /* Make the link fill the list item */
-    padding: 12px 20px; /* Padding inside each list item */
-    text-decoration: none; /* Remove underline */
-    color: #007bff; /* Blue link color */
-    transition: color 0.2s ease-in-out; /* Smooth color transition */
-}
-
-.car-list li:hover {
-    background-color: #f1f3f5; /* Light background on hover */
-}
-
-.car-list li a:hover {
-    color: #0056b3; /* Darker blue on link hover */
-}
-
-.car-list li .right-content {
-    color: red;
-}
-.car-list li .right-content:hover {
-    color: darkred;
-}
-
-/* --- Empty Message Styling --- */
-.car-list li.empty-message {
-    padding: 20px;
-    text-align: center;
-    color: #6c757d; /* Grey color for the message */
-    font-style: italic;
-    border: none; /* Remove border for this specific item */
-}
-
-.car-list li.empty-message:hover {
-    background-color: transparent; /* No hover effect for the empty message */
-}
-
-/* --- Headings --- */
-h2 {
-    color: #495057; /* Slightly softer color for section headings */
-    margin-top: 40px; /* Space above section headings */
-    margin-bottom: 20px;
-    border-bottom: 1px solid #e0e0e0; /* Subtle separator line */
-    padding-bottom: 10px;
-    font-weight: 500; /* Medium weight */
-}
-
-/* First h2 doesn't need top margin */
-.detail-section:first-of-type h2 {
-    margin-top: 10px;
-}
-
-/* --- Detail & Service Lists --- */
-.detail-list, .service-list {
-    list-style: none; /* Remove bullets */
-    padding-left: 0;
-    margin-bottom: 25px; /* Space below lists */
-}
-
-.detail-list li, .service-list li {
-    padding: 10px 5px; /* Padding inside list items */
-    border-bottom: 1px dashed #e0e0e0; /* Dashed separator */
-    line-height: 1.5;
-}
-
-.detail-list li:last-child, .service-list li:last-child {
-    border-bottom: none;
-}
-
-/* Remove margin from paragraphs inside list items for cleaner look */
-.detail-list p {
-    margin: 0;
-}
-
-/* Styling for the label part */
-.detail-list p strong {
-    display: inline-block;
-    min-width: 100px; /* Align values somewhat */
-    color: #555;
-}
-
-/* --- Empty Messages --- */
-.service-list li.empty-message,
-p.empty-message { /* Target both list item and paragraph */
-    font-style: italic;
-    color: #6c757d; /* Bootstrap's text-muted color */
-    text-align: center;
-    padding: 15px 0;
-    border: none; /* Override list item border */
-    margin-top: 10px;
-}
-.service-list li.empty-message:hover {
-    background-color: transparent; /* No hover effect */
-}
-
-/* --- Button Variations & Links --- */
-/* Assuming .btn is defined */
-.btn-primary { /* Renamed from .btn-add or use for primary actions */
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
-.btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-.btn-secondary {
-    color: #fff;
-    background-color: #6c757d; /* Grey */
-    border-color: #6c757d;
-}
-.btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-style: italic;
 }
 
 .btn-link { /* For less prominent actions like Back */
@@ -215,97 +44,278 @@ p.empty-message { /* Target both list item and paragraph */
     text-decoration: underline;
 }
 
-.btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    transition: background-color 0.3s ease;
+/* NavBar and footer */
+.navbar {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: lightgreen;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-title {
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  transition: color 0.2s ease;
+}
+
+.navbar-title:hover {
+  color: #555;
+}
+
+footer {
+  width: 100%;
+  padding: 1rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #333333;
+}
+
+/* Index */
+.car-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.car-list li {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f1f8e9; /* soft green */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.left-content {
+    padding: 0.75rem 1rem;
+  color: #000;
+  text-decoration: none;
+  flex: 0 0 90%;
+  display: block;
+}
+
+.left-content:hover {
+  background-color: lightgreen; /* slightly darker green on hover */
+}
+
+.right-content {
+  color: #c62828; /* red for delete icon */
+    padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: flex;
+  flex: 0 0 10%;
+  align-items: center;
+  justify-content: center;
+}
+
+.right-content i {
+  font-size: 1.25rem; /* adjust icon size */
+}
+
+.right-content:hover {
+  color: #f1f8e9; /* darker red on hover */
+  background-color: #c62828;
+}
+
+.btn-add-car {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #a5d6a7; /* light green */
+  color: #222;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 2rem; /* pushes it to the bottom of the container */
+  text-decoration: none;
+}
+
+.btn-add-car:hover {
+  background-color: lightgreen; /* slightly darker green on hover */
+}
+
+/* create form */
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+input, select, textarea {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #66bb6a; /* light green border on focus */
+  outline: none;
+}
+
+.errorlist {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: #d32f2f;
+}
+
+.errorlist li {
+  font-size: 0.875rem;
+  color: #d32f2f;
+}
+
+/* Submit button */
+form button.btn.btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #66bb6a; /* Light green button */
+  color: white;
+  border: none;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+form button.btn.btn-primary:hover {
+  background-color: #81c784; /* Slightly darker green on hover */
+}
+
+/* Detail */
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Styling for the list */
+.detail-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.detail-list li {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.detail-list li p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.detail-list li p strong {
+  color: #1976d2; /* Blue for the labels */
 }
 
 .btn-danger {
-    background-color: #e74c3c;
-    color: white;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 1rem;
 }
 
 .btn-danger:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }
 
-.action-link {
-    margin-right: 10px; /* Space between buttons */
-    margin-top: 10px; /* Space above button if it follows a list */
-    margin-bottom: 5px; /* Space below button */
-    display: inline-block; /* Needed for margins */
-}
-
-/* --- Table Styling --- */
-.transactions-table {
+.service-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    font-size: 0.9rem; /* Slightly smaller font in table */
-    background-color: #fff; /* Ensure white background */
+    margin-top: 2rem;
 }
 
-.transactions-table th,
-.transactions-table td {
-    border: 1px solid #dee2e6; /* Consistent light border */
-    padding: 10px 12px; /* Padding in cells */
+.service-table th,
+.service-table td {
+    padding: 1rem;
     text-align: left;
-    vertical-align: top;
+    border-bottom: 1px solid #ddd;
 }
 
-.transactions-table thead th {
-    background-color: #f8f9fa; /* Very light grey header */
-    font-weight: 600;
-    color: #495057;
-    vertical-align: bottom;
-    white-space: nowrap; /* Prevent headers from wrapping */
+.service-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
 }
 
-/* Zebra-striping for readability */
-.transactions-table tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, 0.02);
-}
-.transactions-table tbody tr:hover {
-     background-color: rgba(0, 0, 0, 0.06); /* Subtle hover */
+.service-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternating row colors */
 }
 
-/* Right-align numerical data */
-.transactions-table td:nth-child(1), /* DP */
-.transactions-table td:nth-child(2), /* Loan */
-.transactions-table td:nth-child(3), /* Tenor */
-.transactions-table td:nth-child(4), /* Rate */
-.transactions-table td:nth-child(5), /* Services */
-.transactions-table td:nth-child(6), /* Monthly */
-.transactions-table td:nth-child(7) { /* Total */
-    text-align: right;
-    white-space: nowrap; /* Prevent wrapping of numbers */
-    font-family: Consolas, Monaco, monospace; /* Monospaced font for numbers */
+.service-table tr:hover {
+    background-color: #f1f1f1; /* Highlight rows on hover */
 }
-/* Align corresponding headers */
-.transactions-table th:nth-child(3),
-.transactions-table th:nth-child(4),
-.transactions-table th:nth-child(6),
-.transactions-table th:nth-child(7) {
-    text-align: right;
+
+.btn-table {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    color: #e74c3c;
+}
+
+.btn-table:hover {
+    color: #c0392b;
+}
+
+.btn-secondary {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  align-self: right;
+  margin-top: 2rem;
+}
+
+.btn-secondary:hover {
+  background-color: darkblue;
 }
 
 .transactions-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-top: 2rem;
 }
 
 .transactions-table th,
 .transactions-table td {
-    padding: 10px 12px;
-    border: 1px solid #ddd;
+    padding: 1rem;
     text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
 .transactions-table th {
@@ -314,210 +324,83 @@ p.empty-message { /* Target both list item and paragraph */
 }
 
 .transactions-table tr:nth-child(even) {
-    background-color: #fafafa;
+    background-color: #f9f9f9; /* Alternating row colors */
 }
 
-.transaction-form {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.transaction-details {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
+.transactions-table tr:hover {
+    background-color: #f1f1f1; /* Highlight rows on hover */
 }
 
-.transaction-details p {
-    font-size: 16px;
-    margin: 10px 0;
+.transactions-table .btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
 }
 
-.transaction-details strong {
-    color: #3498db;
+.transactions-table .btn-danger:hover {
+    background-color: #c0392b; /* Darker red on hover */
 }
 
-.car-name {
-    font-weight: bold;
-    color: #2980b9;
-}
-
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+.transactions-table td,
+.transactions-table th {
+    font-size: 0.9rem; /* Make the text a bit smaller for better fit */
 }
 
 .table-responsive {
     overflow-x: auto;
+    margin-top: 1rem;
 }
 
-.action-link {
-    display: inline-block;
-    margin-top: 10px;
+.car-details {
+    margin-bottom: 2rem;
 }
 
-.service-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
+.car-details h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
-.service-table th,
-.service-table td {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-.service-table th {
-    background-color: #f2f2f2;
+.car-details .car-name {
+    color: #2c3e50;
     font-weight: bold;
 }
 
-.service-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-/* --- Back Link Section --- */
-.back-link {
-    text-align: left;
-}
-
-/* --- Form Specific Styles (Added) --- */
-form {
-    display: flex;
-    flex-direction: column; /* Stack form fields vertically */
-}
-
-form .form-group {
-    margin-bottom: 15px; /* Add space between form fields */
-}
-
-form button[type="submit"] {
-    align-self: flex-end; /* Align the button to the right */
-    margin-top: 20px; /* Optional: space between the last form field and the button */
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-}
-
-input[type="text"],
-input[type="number"],
-/* Add styles for other input types as needed */
-select,
-textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-.errorlist {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 5px;
-    padding: 0;
-    list-style: none;
-}
-
-.errorlist li {
-    margin-bottom: 2px;
-}
-
-/* Apply button primary style to the submit button */
-button[type="submit"] {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none;
-    background-color: #007bff; /* Primary blue */
-    border: 1px solid #007bff;
-    padding: 0.5rem 1rem;
+.car-details p {
     font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.3rem;
-    text-decoration: none;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    color: #fff;
+    margin: 0.5rem 0;
 }
 
-button[type="submit"]:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+/* Form Container */
+.transaction-form {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;  /* Center the title horizontally */
+.transaction-form .form-container {
+    margin-bottom: 1.5rem;
 }
 
-.navbar-container {
-    display: flex;
-    justify-content: center;  /* Ensure the content is centered */
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* Form Fields */
+.transaction-form .form-container input,
+.transaction-form .form-container select,
+.transaction-form .form-container textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
 }
 
-/* Centered Title with Home Link */
-.navbar-title a {
-    text-decoration: none;  /* Remove default underline from link */
-    color: #fff;  /* Title color */
-}
-
-.navbar-title h1 {
-    font-size: 28px;
-    margin: 0;
-}
-
-/* Hover effect on title link */
-.navbar-title a:hover h1 {
-    color: #f4a261;  /* Change color on hover */
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    .navbar-container {
-        padding: 0 10px;
-    }
-
-    .navbar-title h1 {
-        font-size: 24px;  /* Adjust font size on mobile */
-    }
-}
-
-/* Simple footer styles */
-footer {
-    padding: 10px 0;  /* Vertical padding */
-    text-align: center;  /* Center align the text */
-    position: relative;  /* Ensure it stays at the bottom */
-    bottom: 0;
-    width: 100%;  /* Ensure it takes the full width */
-}
-
-/* Footer text */
-footer p {
-    margin: 0;  /* Remove default margin */
-    font-size: 14px;  /* Set font size */
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-    footer p {
-        font-size: 12px;  /* Smaller font size for mobile */
-    }
+.transaction-form .form-container input:focus,
+.transaction-form .form-container select:focus,
+.transaction-form .form-container textarea:focus {
+    border-color: #66bb6a;
+    outline: none;
 }

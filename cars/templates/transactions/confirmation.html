@@ -28,8 +28,8 @@
         <form method="post" action="{% url 'cars:confirm_car_transaction' car_id=context.car.id %}">
             {% csrf_token %}
             <div class="buttons-container">
-                <button type="submit" name="confirm_transaction" class="btn btn-primary">Confirm</button>
-                <button type="submit" name="cancel_transaction" class="btn btn-secondary">Cancel</button>
+                <button type="submit" name="confirm_transaction" class="btn btn-secondary">Confirm</button>
+                <button type="submit" name="cancel_transaction" class="btn btn-danger">Cancel</button>
             </div>
         </form>
     </div>

@@ -29,9 +29,9 @@
                 <p><strong>Base Price:</strong> Rp{{ car.base_price|intdot }}</p>
             </li>
         </ul>
+        <a href="{% url 'cars:delete_car' car.id %}" class="btn btn-danger">Delete Car</a>
     </div>
 
-    <a href="{% url 'cars:delete_car' car.id %}" class="btn btn-danger">Delete Car</a>
 
     <div class="detail-section">
         <h2>Service History</h2>
@@ -55,19 +55,19 @@
                             <td>
                                 <form method="POST" action="{% url 'cars:delete_service' service.id %}">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    <button type="submit" class="btn-table"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                             </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        {% else %}
+            {% else %}
             <p class="empty-message">No service records yet.</p>
-        {% endif %}
+            {% endif %}
 
-        <a href="{% url 'cars:create_car_service' car.id %}" class="btn btn-secondary action-link">Add Service Record</a> 
-    </div>
+            <a href="{% url 'cars:create_car_service' car.id %}" class="btn btn-secondary action-link">Add Service Record</a> 
+        </div>
 
     <div class="detail-section">
         <h2>Payment Plans</h2>
@@ -100,7 +100,7 @@
                                 <td>
                                     <form method="POST" action="{% url 'cars:delete_transaction' item.id %}">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                        <button type="submit" class="btn-table"><i class="fas fa-trash-alt"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -112,6 +112,6 @@
             <p class="empty-message">No transactions yet for this car.</p>
         {% endif %}
 
-        <a href="{% url 'cars:create_car_transaction' car.id %}" class="btn btn-primary action-link">Add Payment Plan</a>
+        <a href="{% url 'cars:create_car_transaction' car.id %}" class="btn btn-secondary action-link">Add Payment Plan</a>
     </div>
 {% endblock %}

@@ -22,7 +22,20 @@
         {% csrf_token %}
         
         <div class="form-container">
-            {{ form.as_p }}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }} <!-- Renders the field with its widget -->
+
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
         </div>
 
         <div class="form-actions">
@@ -30,4 +43,55 @@
         </div>
     </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the elements using the correct IDs
+        const isLoanCheckbox = document.getElementById("id_is_loan");
+        const downPaymentField = document.getElementById("id_down_payment");
+        const tenorField = document.getElementById("id_tenor");
+        const annualInterestRateField = document.getElementById("id_annual_interest_rate");
+        const form = document.querySelector("form");
+
+        // Ensure that the elements exist before trying to manipulate them
+        if (isLoanCheckbox && downPaymentField && tenorField && annualInterestRateField) {
+            // Initially set the fields to 0 and disable them if is_loan is false
+            if (!isLoanCheckbox.checked) {
+                downPaymentField.value = 0;  // Set down_payment to 0
+                downPaymentField.disabled = true;  // Disable the field
+                tenorField.value = 0;  // Set tenor to 0
+                tenorField.disabled = true;  // Disable the field
+                annualInterestRateField.value = 0;  // Set annual_interest_rate to 0
+                annualInterestRateField.disabled = true;  // Disable the field
+            }
+
+            // Add event listener to dynamically update the fields when is_loan is checked/unchecked
+            isLoanCheckbox.addEventListener("change", function () {
+                if (!isLoanCheckbox.checked) {
+                    downPaymentField.value = 0;  // Set down_payment to 0
+                    downPaymentField.disabled = true;  // Disable the field
+                    tenorField.value = 0;  // Set tenor to 0
+                    tenorField.disabled = true;  // Disable the field
+                    annualInterestRateField.value = 0;  // Set annual_interest_rate to 0
+                    annualInterestRateField.disabled = true;  // Disable the field
+                } else {
+                    downPaymentField.disabled = false;  // Enable the field
+                    tenorField.disabled = false;  // Enable the field
+                    annualInterestRateField.disabled = false;  // Enable the field
+                }
+            });
+
+            // Before form submission, enable the disabled fields so their values are sent
+            form.addEventListener("submit", function () {
+                if (!isLoanCheckbox.checked) {
+                    downPaymentField.disabled = false;
+                    tenorField.disabled = false;
+                    annualInterestRateField.disabled = false;
+                }
+            });
+        } else {
+            console.error("Could not find form fields with the given IDs.");
+        }
+    });
+</script>
 {% endblock %}
