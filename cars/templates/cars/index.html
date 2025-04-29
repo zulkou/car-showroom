@@ -1,24 +1,21 @@
-{% load static %}  
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car List</title>
-    <link rel="stylesheet" href="{% static 'cars/css/style.css' %}">  </head>
-<body>
-    <div class="container"> <h1>Car List</h1>
+{% extends "base.html" %}
 
-        <a href="{% url 'cars:create_car' %}" class="btn btn-add">Add New Car</a>
+{% block title %}Car List{% endblock %}
 
-        <ul class="car-list">
+{% block header %}All Cars{% endblock %}
+
+{% block content %}
+<div class="container"> <h1>Car List</h1>
+    <ul class="car-list">
         {% for car in cars %}
-            <li>
-                <a href="{% url 'cars:detail_car' car.id %}">{{ car }}</a> <a href="{% url 'cars:delete_car' car.id %}">Delete</a>
-            </li>
+        <li>
+            <a class="left-content" href="{% url 'cars:detail_car' car.id %}">{{ car }}</a>
+            <a class="right-content" href="{% url 'cars:delete_car' car.id %}"><i class="fas fa-trash-alt"></i></a>
+        </li>
         {% empty %}
-            <li class="empty-message">No cars available.</li>
+        <li class="empty-message">No cars available.</li>
         {% endfor %}
-        </ul>
-    </div> </body>
-</html>
+    </ul>
+    <a href="{% url 'cars:create_car' %}" class="btn-add-car">Add New Car</a>
+</div>
+{% endblock %}

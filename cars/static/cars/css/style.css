@@ -5,7 +5,7 @@ body {
     background-color: #f8f9fa; /* Light grey background */
     color: #343a40; /* Darker text color */
     margin: 0;
-    padding: 20px; /* Add some padding around the container */
+    padding: 0; /* Add some padding around the container */
 }
 
 .container {
@@ -25,35 +25,31 @@ h1 {
     font-weight: 600;
 }
 
-/* --- Button Styling (for the Add link) --- */
-.btn {
-    display: inline-block; /* Allow padding and margin */
-    font-weight: 400;
+/* Centering the Add New Car button */
+.btn-add-car {
+    display: block;
+    margin: 30px auto;  /* Center button with margin */
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
     text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    user-select: none; /* Prevent text selection */
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: 0.5rem 1rem; /* Button size */
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.3rem; /* Slightly rounded corners for button */
-    text-decoration: none; /* Remove underline from link */
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transitions */
-    margin-bottom: 25px; /* Space below the button */
-}
-
-.btn-add {
-    color: #fff;
-    background-color: #28a745; /* Green color */
-    border-color: #28a745;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 .btn-add:hover {
-    color: #fff;
-    background-color: #218838; /* Darker green on hover */
-    border-color: #1e7e34;
+    background-color: #2980b9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .btn-add {
+        width: 100%;  /* Button will take full width on small screens */
+        padding: 12px 0;
+        font-size: 16px;
+    }
 }
 
 /* --- Car List Styling --- */
@@ -67,8 +63,23 @@ h1 {
 }
 
 .car-list li {
-    border-bottom: 1px solid #dee2e6; /* Separator line between items */
-    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+    display: flex;
+    align-items: center;        /* Vertically center */
+    justify-content: space-between; /* Push left and right apart */
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+}
+
+.car-list .left-content {
+    flex: 1;                      /* Take remaining space */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.car-list .right-content {
+    width: 10%;                   /* Fixed width */
+    text-align: right;             /* Align text inside to right */
 }
 
 .car-list li:last-child {
@@ -89,6 +100,13 @@ h1 {
 
 .car-list li a:hover {
     color: #0056b3; /* Darker blue on link hover */
+}
+
+.car-list li .right-content {
+    color: red;
+}
+.car-list li .right-content:hover {
+    color: darkred;
 }
 
 /* --- Empty Message Styling --- */
@@ -197,6 +215,25 @@ p.empty-message { /* Target both list item and paragraph */
     text-decoration: underline;
 }
 
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
 .action-link {
     margin-right: 10px; /* Space between buttons */
     margin-top: 10px; /* Space above button if it follows a list */
@@ -258,44 +295,111 @@ p.empty-message { /* Target both list item and paragraph */
     text-align: right;
 }
 
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
 
-/* --- Responsive Table Wrapper --- */
+.transactions-table th,
+.transactions-table td {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.transactions-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.transactions-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.transaction-form {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.transaction-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.transaction-details p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.transaction-details strong {
+    color: #3498db;
+}
+
+.car-name {
+    font-weight: bold;
+    color: #2980b9;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .table-responsive {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smoother scrolling on iOS */
-    margin-bottom: 1rem;
-    border: 1px solid #dee2e6; /* Add border to the container */
-    border-radius: 5px; /* Optional: rounded corners */
-}
-/* Remove margin/border from table itself when inside wrapper */
-.table-responsive > .transactions-table {
-    margin-bottom: 0;
-    border: none;
-}
-.table-responsive > .transactions-table th:first-child,
-.table-responsive > .transactions-table td:first-child {
-    border-left: none;
-}
-.table-responsive > .transactions-table th:last-child,
-.table-responsive > .transactions-table td:last-child {
-    border-right: none;
-}
-.table-responsive > .transactions-table tbody tr:last-child td {
-    border-bottom: none;
+    overflow-x: auto;
 }
 
+.action-link {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.service-table th,
+.service-table td {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.service-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.service-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
 
 /* --- Back Link Section --- */
-.back-link-section {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
-    text-align: center;
+.back-link {
+    text-align: left;
 }
 
 /* --- Form Specific Styles (Added) --- */
-.form-group {
-    margin-bottom: 15px;
+form {
+    display: flex;
+    flex-direction: column; /* Stack form fields vertically */
+}
+
+form .form-group {
+    margin-bottom: 15px; /* Add space between form fields */
+}
+
+form button[type="submit"] {
+    align-self: flex-end; /* Align the button to the right */
+    margin-top: 20px; /* Optional: space between the last form field and the button */
 }
 
 label {
@@ -351,4 +455,69 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #0056b3;
     border-color: #0056b3;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;  /* Center the title horizontally */
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: center;  /* Ensure the content is centered */
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Centered Title with Home Link */
+.navbar-title a {
+    text-decoration: none;  /* Remove default underline from link */
+    color: #fff;  /* Title color */
+}
+
+.navbar-title h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+/* Hover effect on title link */
+.navbar-title a:hover h1 {
+    color: #f4a261;  /* Change color on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .navbar-container {
+        padding: 0 10px;
+    }
+
+    .navbar-title h1 {
+        font-size: 24px;  /* Adjust font size on mobile */
+    }
+}
+
+/* Simple footer styles */
+footer {
+    padding: 10px 0;  /* Vertical padding */
+    text-align: center;  /* Center align the text */
+    position: relative;  /* Ensure it stays at the bottom */
+    bottom: 0;
+    width: 100%;  /* Ensure it takes the full width */
+}
+
+/* Footer text */
+footer p {
+    margin: 0;  /* Remove default margin */
+    font-size: 14px;  /* Set font size */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    footer p {
+        font-size: 12px;  /* Smaller font size for mobile */
+    }
 }

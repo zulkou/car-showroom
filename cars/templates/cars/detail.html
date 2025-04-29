@@ -1,82 +1,103 @@
-{% load static %}
-{% load number_filters %} <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ car }} Details</title>
-    <link rel="stylesheet" href="{% static 'cars/css/style.css' %}"> </head>
-<body>
-    <div class="container">
-        <div class="back-link-section">
-            <a href="{% url 'cars:index' %}" class="btn btn-link">&laquo; Back to Car List</a>
-        </div>
-        <h1>{{ car }}</h1>
+{% extends "base.html" %}
 
-        <div class="detail-section">
-            <h2>Details</h2>
-            <ul class="detail-list">
-                <li>
-                    <p><strong>Brand:</strong> {{ car.brand }}</p>
-                </li>
-                <li>
-                    <p><strong>Model:</strong> {{ car.model }}</p>
-                </li>
-                <li>
-                    <p><strong>Year:</strong> {{ car.year }}</p>
-                </li>
-                <li>
-                    <p><strong>Base Price:</strong> Rp{{ car.base_price|intdot }}</p>
-                </li>
-            </ul>
-        </div>
+{% load number_filters %}
 
-        <a href="{% url 'cars:delete_car' car.id %}">Delete Car</a>
+{% block title %}Car List{% endblock %}
 
-        <div class="detail-section">
-            <h2>Service History</h2>
-            <ul class="service-list">
-            {% for service in services %}
-                <li>{{ service.date }} - {{ service.description }} - Rp{{ service.cost|intdot }}</li>
-            {% empty %}
-                <li class="empty-message">No services yet.</li>
-            {% endfor %}
-            </ul>
-            <a href="{% url 'cars:create_car_service' car.id %}" class="btn btn-secondary action-link">Add Service Record</a> </div>
+{% block header %}All Cars{% endblock %}
 
-        <div class="detail-section">
-            <h2>Transactions</h2>
-            {% if transactions_detail %}
-            <div class="table-responsive">
-                 <table class="transactions-table"> <thead>
+{% block content %}
+<div class="container">
+    <div class="back-link">
+        <a href="{% url 'cars:index' %}" class="btn btn-link">&laquo; Back</a>
+    </div>
+    <h1>{{ car }}</h1>
+
+    <div class="detail-section">
+        <h2>Details</h2>
+        <ul class="detail-list">
+            <li>
+                <p><strong>Brand:</strong> {{ car.brand }}</p>
+            </li>
+            <li>
+                <p><strong>Model:</strong> {{ car.model }}</p>
+            </li>
+            <li>
+                <p><strong>Year:</strong> {{ car.year }}</p>
+            </li>
+            <li>
+                <p><strong>Base Price:</strong> Rp{{ car.base_price|intdot }}</p>
+            </li>
+        </ul>
+    </div>
+
+    <a href="{% url 'cars:delete_car' car.id %}" class="btn btn-danger">Delete Car</a>
+
+    <div class="detail-section">
+        <h2>Service History</h2>
+
+        {% if services %}
+            <table class="service-table">
+                <thead>
                     <tr>
-                        <th>Down Payment</th>
-                        <th>Loan Amount</th>
-                        <th>Tenor (months)</th>
-                        <th>Annual Interest Rate (%)</th>
-                        <th>Services Cost</th>
-                        <th>Monthly Payment</th>
-                        <th>Total Cost</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Cost</th>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for item in transactions_detail %}
+                </thead>
+                <tbody>
+                    {% for service in services %}
                         <tr>
-                            <td>Rp{{ item.down_payment|intdot }}</td>
-                            <td>Rp{{ item.loan_amount|intdot }}</td>
-                            <td>{{ item.tenor }}</td>
-                            <td>{{ item.annual_interest_rate|floatformat:2 }}</td>
-                            <td>Rp{{ item.services_cost|intdot }}</td>
-                            <td>Rp{{ item.monthly_payment|intdot }}</td>
-                            <td>Rp{{ item.total_cost|intdot }}</td>
+                            <td>{{ service.date }}</td>
+                            <td>{{ service.description }}</td>
+                            <td>Rp{{ service.cost|intdot }}</td>
                         </tr>
                     {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="empty-message">No service records yet.</p>
+        {% endif %}
+
+        <a href="{% url 'cars:create_car_service' car.id %}" class="btn btn-secondary action-link">Add Service Record</a> 
+    </div>
+
+    <div class="detail-section">
+        <h2>Payment Plans</h2>
+
+        {% if transactions_detail %}
+            <div class="table-responsive">
+                <table class="transactions-table">
+                    <thead>
+                        <tr>
+                            <th>Down Payment</th>
+                            <th>Loan Amount</th>
+                            <th>Tenor (months)</th>
+                            <th>Annual Interest Rate (%)</th>
+                            <th>Services Cost</th>
+                            <th>Monthly Payment</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in transactions_detail %}
+                            <tr>
+                                <td>Rp{{ item.down_payment|intdot }}</td>
+                                <td>Rp{{ item.loan_amount|intdot }}</td>
+                                <td>{{ item.tenor }}</td>
+                                <td>{{ item.annual_interest_rate|floatformat:2 }}</td>
+                                <td>Rp{{ item.services_cost|intdot }}</td>
+                                <td>Rp{{ item.monthly_payment|intdot }}</td>
+                                <td>Rp{{ item.total_cost|intdot }}</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
-            {% else %}
-            <p class="empty-message">No transactions yet for this car.</p> {% endif %}
-            <a href="{% url 'cars:create_car_transaction' car.id %}" class="btn btn-primary action-link">Simulasi Pembelian</a> </div>
+        {% else %}
+            <p class="empty-message">No transactions yet for this car.</p>
+        {% endif %}
 
-    </div> </body>
-</html>
+        <a href="{% url 'cars:create_car_transaction' car.id %}" class="btn btn-primary action-link">Add Payment Plan</a>
+    </div>
+{% endblock %}

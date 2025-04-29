@@ -1,36 +1,32 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Form</title>
-    <link rel="stylesheet" href="{% static 'cars/css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <div class="back-link-section">
-            <a href="{% url 'cars:detail_car' car.id %}" class="btn btn-link">&laquo; Back to Car Detail</a>
-        </div>
-        <h1>Create Service for {{ car }}</h1>
+{% extends "base.html" %}
 
-        <form method="POST">
-            {% csrf_token %}
-            {% for field in form %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                    {% if field.errors %}
-                        <ul class="errorlist">
-                            {% for error in field.errors %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </div>
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Create Service</button>
-        </form>
+{% block title %}Car List{% endblock %}
+
+{% block header %}All Cars{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="back-link">
+        <a href="{% url 'cars:detail_car' car.id %}" class="btn btn-link">&laquo; Back</a>
     </div>
-</body>
-</html>
+    <h1>Create Service for {{ car }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <ul class="errorlist">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Create Service</button>
+    </form>
+</div>
+{% endblock %}

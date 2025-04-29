@@ -1,34 +1,37 @@
-{% load static %}
-{% load number_filters %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction Confirmation</title>
-    <link rel="stylesheet" href="{% static 'cars/css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>Transaction Confirmation</h1>
+{% extends "base.html" %}
 
-        <p><strong>Car:</strong> {{ context.car }}</p>
-        <p><strong>Base Price:</strong> {{ context.car.base_price|intdot }}</p>
-        <p><strong>Services Cost:</strong> {{ context.services_cost|intdot }}</p>
+{% load number_filters %}
+
+{% block title %}Car List{% endblock %}
+
+{% block header %}All Cars{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Transaction Confirmation</h1>
+
+    <div class="transaction-details">
+        <p><strong>Car:</strong> <span class="car-name">{{ context.car }}</span></p>
+        <p><strong>Base Price:</strong> Rp{{ context.car.base_price|intdot }}</p>
+        <p><strong>Services Cost:</strong> Rp{{ context.services_cost|intdot }}</p>
 
         {% if context.is_loan %}
-            <p><strong>Loan Amount:</strong> {{ context.loan_amount|intdot }}</p>
-            <p><strong>Monthly Payment:</strong> {{ context.monthly_payment|intdot }}</p>
-            <p><strong>Total Cost:</strong> {{ context.total_cost|intdot }}</p>
+            <p><strong>Loan Amount:</strong> Rp{{ context.loan_amount|intdot }}</p>
+            <p><strong>Monthly Payment:</strong> Rp{{ context.monthly_payment|intdot }}</p>
+            <p><strong>Total Cost:</strong> Rp{{ context.total_cost|intdot }}</p>
         {% else %}
-            <p><strong>Total Cost (without loan):</strong> {{ context.total_cost|intdot }}</p>
+            <p><strong>Total Cost (without loan):</strong> Rp{{ context.total_cost|intdot }}</p>
         {% endif %}
+    </div>
 
+    <div class="form-actions">
         <form method="post" action="{% url 'cars:confirm_car_transaction' car_id=context.car.id %}">
             {% csrf_token %}
-            <button type="submit" name="confirm_transaction" class="btn btn-primary action-link">Confirm</button>
-            <button type="submit" name="cancel_transaction" class="btn btn-secondary action-link">Cancel</button>
+            <div class="buttons-container">
+                <button type="submit" name="confirm_transaction" class="btn btn-primary">Confirm</button>
+                <button type="submit" name="cancel_transaction" class="btn btn-secondary">Cancel</button>
+            </div>
         </form>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

@@ -1,27 +1,33 @@
-{% load static %}
+{% extends "base.html" %}
+
 {% load number_filters %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Form</title>
-    <link rel="stylesheet" href="{% static 'cars/css/style.css' %}">
-</head>
-<body>
-    <div class="container">
-        <div class="back-link-section">
-            <a href="{% url 'cars:detail_car' car.id %}" class="btn btn-link">&laquo; Back to Car Detail</a>
-        </div>
-        <h3>Create Transaction for Car: {{ car }}</h3>
-        <p>Brand: {{ car.brand }}</p>
-        <p>Base Price: {{ car.base_price|intdot }}</p>
 
-        <form method="POST">
-            {% csrf_token %}
+{% block title %}Car List{% endblock %}
 
-            {{ form.as_p }}  <button type="submit" class="btn btn-primary">Proceed to Confirmation</button>
-        </form>
+{% block header %}All Cars{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="back-link">
+        <a href="{% url 'cars:detail_car' car.id %}" class="btn btn-link">&laquo; Back</a>
     </div>
-</body>
-</html>
+    
+    <div class="car-details">
+        <h3>Create Transaction for Car: <span class="car-name">{{ car }}</span></h3>
+        <p><strong>Brand:</strong> {{ car.brand }}</p>
+        <p><strong>Base Price:</strong> Rp{{ car.base_price|intdot }}</p>
+    </div>
+
+    <form method="POST" class="transaction-form">
+        {% csrf_token %}
+        
+        <div class="form-container">
+            {{ form.as_p }}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Proceed to Confirmation</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
