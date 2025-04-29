@@ -43,6 +43,7 @@
                         <th>Date</th>
                         <th>Description</th>
                         <th>Cost</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,6 +52,12 @@
                             <td>{{ service.date }}</td>
                             <td>{{ service.description }}</td>
                             <td>Rp{{ service.cost|intdot }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'cars:delete_service' service.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -77,6 +84,7 @@
                             <th>Services Cost</th>
                             <th>Monthly Payment</th>
                             <th>Total Cost</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,6 +97,12 @@
                                 <td>Rp{{ item.services_cost|intdot }}</td>
                                 <td>Rp{{ item.monthly_payment|intdot }}</td>
                                 <td>Rp{{ item.total_cost|intdot }}</td>
+                                <td>
+                                    <form method="POST" action="{% url 'cars:delete_transaction' item.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

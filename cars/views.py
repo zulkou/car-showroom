@@ -29,6 +29,7 @@ def detail_car(request, car_id):
         services_cost, loan_amount, monthly_payment, total_cost = calculate_loan_details(transaction, car)
 
         transactions_detail.append({
+            'id': transaction.id,
             'is_loan': transaction.is_loan,
             'down_payment': transaction.down_payment,
             'tenor': transaction.tenor,
@@ -125,3 +126,23 @@ def delete_car(request, car_id):
         car.delete()
         return redirect('cars:index')  # Redirect back to car list
     return render(request, 'cars/delete.html', {'car': car})
+
+def delete_service(request, service_id):
+    try:
+        service = Service.objects.get(id=service_id)
+        
+        service.delete()
+        
+        return redirect('cars:detail_car', car_id=service.car.id)  # Replace with the actual view name for your transaction list
+    except Transaction.DoesNotExist:
+        return redirect('cars:detail_car', car_id=service.car.id)  # Redirect in case transaction doesn't exist
+
+def delete_transaction(request, transaction_id):
+    try:
+        transaction = Transaction.objects.get(id=transaction_id)
+        
+        transaction.delete()
+        
+        return redirect('cars:detail_car', car_id=transaction.car.id)  # Replace with the actual view name for your transaction list
+    except Transaction.DoesNotExist:
+        return redirect('cars:detail_car', car_id=transaction.car.id)  # Redirect in case transaction doesn't exist

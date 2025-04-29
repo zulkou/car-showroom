@@ -12,4 +12,6 @@ urlpatterns = [
     path('transactions/create/<uuid:car_id>/', views.create_car_transaction, name='create_car_transaction'),
     path('transaction/confirm/<uuid:car_id>/', views.confirm_car_transaction, name='confirm_car_transaction'),
     path('delete/<uuid:car_id>/', views.delete_car, name='delete_car'),
+    path('delete_service/<uuid:service_id>/', views.delete_service, name='delete_service'),
+    path('delete_transaction/<uuid:transaction_id>/', views.delete_transaction, name='delete_transaction'),
 ]
