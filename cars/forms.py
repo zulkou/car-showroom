@@ -14,17 +14,4 @@ class ServiceForm(forms.ModelForm):
 class TransactionForm(forms.ModelForm):
     class Meta:
         model = Transaction
-        fields = ['is_loan', 'annual_interest_rate', 'total_cost']
-
-    def save(self, commit=True):
-        transaction = super().save(commit=False)
-
-        if commit:
-            transaction.save()
-
-            if self.cleaned_data.get('car_sold', False):
-                car = transaction.car
-                car.is_sold = True
-                car.save()
-            
-        return transaction
+        fields = ['is_loan', 'down_payment', 'tenor', 'annual_interest_rate']

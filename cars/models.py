@@ -44,10 +44,8 @@ class Transaction(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="payments")
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="transactions")
     is_loan = models.BooleanField()
+    down_payment = models.BigIntegerField(null=True)
+    tenor = models.IntegerField(null=True)
     annual_interest_rate = models.DecimalField(max_digits=6, decimal_places=2, null=True)
-    total_cost = models.BigIntegerField()
-
-    def __str__(self):
-        return f"{self.car} is sold at {self.total_cost}"
