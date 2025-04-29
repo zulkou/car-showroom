@@ -14,7 +14,7 @@
         <ul class="car-list">
         {% for car in cars %}
             <li>
-                <a href="{% url 'cars:detail_car' car.id %}">{{ car }}</a>
+                <a href="{% url 'cars:detail_car' car.id %}">{{ car }}</a> <a href="{% url 'cars:delete_car' car.id %}">Delete</a>
             </li>
         {% empty %}
             <li class="empty-message">No cars available.</li>

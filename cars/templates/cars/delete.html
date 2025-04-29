@@ -1,0 +1,7 @@
+<h1>Delete {{ car.name }}?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'cars:index' %}">Cancel</a>
+</form>

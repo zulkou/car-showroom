@@ -118,3 +118,10 @@ def confirm_car_transaction(request, car_id):
             'total_cost': total_cost
         }
     })
+
+def delete_car(request, car_id):
+    car = get_object_or_404(Car, id=car_id)
+    if request.method == 'POST':
+        car.delete()
+        return redirect('cars:index')  # Redirect back to car list
+    return render(request, 'cars/delete.html', {'car': car})
